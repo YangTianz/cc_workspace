@@ -1,6 +1,6 @@
 FROM node:20-alpine
 
-RUN apk add --no-cache less git sudo zsh unzip python3 curl && \
+RUN apk add --no-cache less git sudo zsh unzip python3 curl openssh-client && \
   mkdir -p /usr/local/share/npm-global && \
   chown -R node:node /usr/local/share
 
@@ -20,6 +20,15 @@ RUN mkdir -p /workspace /home/node/.claude && \
   chown -R node:node /workspace /home/node/.claude
 
 WORKDIR /workspace
+
+# # 配置 git 用户信息
+# RUN git config --global user.name "${GIT_USER_NAME}" && \
+#     git config --global user.email "${GIT_USER_EMAIL}"
+
+# XXX: 配置 SSH
+RUN mkdir -p /home/node/.ssh && \
+    chmod 700 /home/node/.ssh && \
+    chown -R node:node /home/node/.ssh
 
 # Set up non-root user
 USER node
