@@ -68,3 +68,6 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+
+mrsync/
