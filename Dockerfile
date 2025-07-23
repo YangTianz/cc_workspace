@@ -1,6 +1,6 @@
-FROM node:20
+FROM node:20-alpine
 
-RUN apt update && apt install -y less git sudo zsh unzip python3 curl && \
+RUN apk add --no-cache less git sudo zsh unzip python3 curl && \
   mkdir -p /usr/local/share/npm-global && \
   chown -R node:node /usr/local/share
 
@@ -32,7 +32,8 @@ ENV PATH=$PATH:/usr/local/share/npm-global/bin
 ENV SHELL=/bin/zsh
 
 # Install Claude
-RUN npm install -g @anthropic-ai/claude-code
+RUN npm install -g @anthropic-ai/claude-code && \
+  npm cache clean --force
 
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
