@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   curl \
   nodejs \
   npm \
+  vim \
   && groupadd --gid 1000 $GROUP \
   && useradd --uid 1000 --gid $GROUP --shell /bin/bash --create-home $USERNAME \
   && mkdir -p /usr/local/share/npm-global \
@@ -28,18 +29,15 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhisto
   && touch /commandhistory/.bash_history \
   && chown -R $USERNAME /commandhistory
 
-# Set `DEVCONTAINER` environment variable to help with orientation
-ENV DEVCONTAINER=true
-
 # Create workspace and config directories and set permissions
 RUN mkdir -p /workspace /home/$USERNAME/.claude && \
   chown -R $USERNAME:$GROUP /workspace /home/$USERNAME/.claude
 
-WORKDIR /workspace
+# Copy entrypoint script and set permissions before switching to non-root user
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
-# # 配置 git 用户信息
-# RUN git config --global user.name "${GIT_USER_NAME}" && \
-#     git config --global user.email "${GIT_USER_EMAIL}"
+WORKDIR /workspace
 
 # XXX: 配置 SSH
 RUN mkdir -p /home/node/.ssh && \
@@ -60,11 +58,15 @@ ENV SHELL=/bin/zsh
 ENV EDITOR=vim
 ENV VISUAL=vim
 
+# Set `DEVCONTAINER` environment variable to help with orientation
+ENV DEVCONTAINER=true
+
+
 # Install Claude
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} && \
   npm cache clean --force
 
 USER $USERNAME
 
-ENV ANTHROPIC_AUTH_TOKEN=${ANTHROPIC_AUTH_TOKEN}
-CMD ["tail", "-f", "/dev/null"] 
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+CMD ["tail", "-f", "/dev/null"]
