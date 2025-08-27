@@ -6,6 +6,9 @@ ARG GROUP=node
 
 # Install required system dependencies and create user in one layer
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  gcc \
+  g++ \
+  build-essential \
   git \
   sudo \
   zsh \
@@ -41,8 +44,7 @@ WORKDIR /workspace
 
 # XXX: 配置 SSH
 RUN mkdir -p /home/node/.ssh && \
-    chmod 700 /home/node/.ssh && \
-    chown -R $USERNAME:$GROUP /home/$USERNAME/.ssh
+    chmod 700 /home/node/.ssh
 
 # Set up non-root user
 USER $USERNAME
@@ -60,7 +62,6 @@ ENV VISUAL=vim
 
 # Set `DEVCONTAINER` environment variable to help with orientation
 ENV DEVCONTAINER=true
-
 
 # Install Claude
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} && \
