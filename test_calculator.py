@@ -97,3 +97,54 @@ class TestCalculator:
     ])
     def test_sqrt_parametrized(self, a, expected):
         assert self.calc.sqrt(a) == expected
+
+    def test_pow(self):
+        assert self.calc.pow(2, 3) == 8
+        assert self.calc.pow(5, 0) == 1
+        assert self.calc.pow(10, 1) == 10
+        assert self.calc.pow(3, 2) == 9
+        assert self.calc.pow(-2, 3) == -8
+        assert self.calc.pow(-3, 2) == 9
+        assert self.calc.pow(2, -1) == 0.5
+        assert self.calc.pow(4, -2) == 0.0625
+        assert self.calc.pow(0, 5) == 0
+        assert self.calc.pow(1, 100) == 1
+        assert self.calc.pow(2.5, 2) == 6.25
+        assert self.calc.pow(10, 0.5) == pytest.approx(3.162277660168379)
+        assert self.calc.pow(8, 1/3) == pytest.approx(2.0)
+        assert self.calc.pow(float('inf'), 2) == float('inf')
+        assert self.calc.pow(2, float('inf')) == float('inf')
+
+    def test_pow_zero_to_zero(self):
+        # This is mathematically undefined, but Python returns 1
+        assert self.calc.pow(0, 0) == 1
+
+    def test_pow_negative_exponent(self):
+        assert self.calc.pow(2, -3) == 0.125
+        assert self.calc.pow(10, -2) == 0.01
+        assert self.calc.pow(-2, -3) == -0.125
+
+    def test_pow_fractional_exponent(self):
+        assert self.calc.pow(4, 0.5) == 2
+        assert self.calc.pow(9, 0.5) == 3
+        assert self.calc.pow(8, 1/3) == pytest.approx(2.0)
+        assert self.calc.pow(16, 0.25) == 2
+
+    @pytest.mark.parametrize("base,exponent,expected", [
+        (2, 3, 8),
+        (5, 0, 1),
+        (10, 1, 10),
+        (3, 2, 9),
+        (-2, 3, -8),
+        (-3, 2, 9),
+        (2, -1, 0.5),
+        (4, -2, 0.0625),
+        (0, 5, 0),
+        (1, 100, 1),
+        (2.5, 2, 6.25),
+        (10, 0.5, pytest.approx(3.162277660168379)),
+        (8, 1/3, pytest.approx(2.0)),
+        (0, 0, 1),
+    ])
+    def test_pow_parametrized(self, base, exponent, expected):
+        assert self.calc.pow(base, exponent) == expected

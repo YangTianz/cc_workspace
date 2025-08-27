@@ -18,6 +18,9 @@ class Calculator:
             raise ValueError("Cannot calculate square root of negative number")
         return a ** 0.5
 
+    def pow(self, base, exponent):
+        return base ** exponent
+
 
 def main():
     print("Hello from ai-agent!")
@@ -28,6 +31,8 @@ def main():
     print(f"15 / 3 = {calc.divide(15, 3)}")
     print(f"√16 = {calc.sqrt(16)}")
     print(f"√25 = {calc.sqrt(25)}")
+    print(f"2^8 = {calc.pow(2, 8)}")
+    print(f"5^3 = {calc.pow(5, 3)}")
 
 
 if __name__ == "__main__":
