@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run:*)",
+      "Bash(git pull)",
+      "Bash(git stash:*)",
+      "Bash(git diff:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [
+      "Read(./.env.*)",
+      "Read(./.env)"
+    ],
+    "ask": [
+      "Bash(git push:*)"
+    ]
+  },
+  "env": {
+    "USERNAME": "g85robot"
+  }
+}
