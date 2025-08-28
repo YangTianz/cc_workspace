@@ -17,8 +17,8 @@ services:
     env_file:
       - ../.env
     environment:
-      - ANTHROPIC_BASE_URL="https://api.moonshot.cn/anthropic"
-      - GITLAB_HOST="http://git-internal.nie.netease.com/"
+      - ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic
+      - GITLAB_BASE_URL=http://git-internal.nie.netease.com/
     volumes:
       - ~/.ssh:/home/node/.ssh:ro
       - ~/monorepo:/workspace/monorepo

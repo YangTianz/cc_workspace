@@ -1,6 +1,8 @@
 {
   "permissions": {
     "allow": [
+      "Bash(ls:*)",
+      // "Bash(rm:*)",
       "Bash(uv run:*)",
       "Bash(git pull)",
       "Bash(git stash:*)",
