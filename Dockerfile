@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   unzip \
   openssh-client \
   curl \
+  wget \
   nodejs \
   npm \
   vim \
