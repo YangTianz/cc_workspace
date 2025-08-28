@@ -42,6 +42,7 @@ COPY deploy/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 WORKDIR /workspace
+COPY .claude /workspace/.claude
 
 # XXX: 配置 SSH
 RUN mkdir -p /home/node/.ssh && \
