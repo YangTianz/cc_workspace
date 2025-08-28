@@ -44,7 +44,6 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 COPY .claude /home/$USERNAME/.claude
 COPY claude_agent.py /home/$USERNAME/claude_agent.py
 
-# XXX: 配置 SSH
 RUN mkdir -p /home/node/.ssh && \
     chmod 700 /home/node/.ssh
 
