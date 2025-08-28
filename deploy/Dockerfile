@@ -41,8 +41,8 @@ RUN mkdir -p /workspace /home/$USERNAME/.claude && \
 COPY deploy/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-WORKDIR /workspace
-COPY .claude /workspace/.claude
+COPY .claude /home/$USERNAME/.claude
+COPY claude_agent.py /home/$USERNAME/claude_agent.py
 
 # XXX: 配置 SSH
 RUN mkdir -p /home/node/.ssh && \
@@ -51,25 +51,20 @@ RUN mkdir -p /home/node/.ssh && \
 # Set up non-root user
 USER $USERNAME
 
-# Install global packages
-ENV NPM_CONFIG_PREFIX=/usr/local/share/npm-global
-ENV PATH=$PATH:/usr/local/share/npm-global/bin
-
-# Set the default shell to zsh rather than sh
-ENV SHELL=/bin/zsh
-
-# Set the default editor and visual
-ENV EDITOR=vim
-ENV VISUAL=vim
-
-# Set `DEVCONTAINER` environment variable to help with orientation
-ENV DEVCONTAINER=true
+# Install global packages and set environment variables
+ENV NPM_CONFIG_PREFIX=/usr/local/share/npm-global \
+    PATH=$PATH:/usr/local/share/npm-global/bin \
+    SHELL=/bin/zsh \
+    EDITOR=vim \
+    VISUAL=vim \
+    DEVCONTAINER=true
 
 # Install Claude
 RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} && \
   npm cache clean --force
 
 USER $USERNAME
-
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["tail", "-f", "/dev/null"]
+
+WORKDIR /home/$USERNAME
+CMD ["uv", "run", "--script", "claude_agent.py"]
