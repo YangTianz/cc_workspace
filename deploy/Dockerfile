@@ -38,7 +38,7 @@ RUN mkdir -p /workspace /home/$USERNAME/.claude && \
   chown -R $USERNAME:$GROUP /workspace /home/$USERNAME/.claude
 
 # Copy entrypoint script and set permissions before switching to non-root user
-COPY entrypoint.sh /usr/local/bin/
+COPY deploy/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 WORKDIR /workspace

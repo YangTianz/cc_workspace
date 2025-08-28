@@ -3,26 +3,22 @@ version: '3.8'
 services:
   claude-docker:
     build: 
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: deploy/Dockerfile
       args:
         USERNAME: node
         GROUP: node
         CLAUDE_CODE_VERSION: latest
     image: ytz-ai-agent-image 
     container_name: ytz-ai-agent
-    # 对应 docker run --network host
     # network_mode: "host"
     ports:
       - "8000:8000"  # API服务端口
     env_file:
-      - .env
+      - ../.env
     environment:
       - ANTHROPIC_BASE_URL="https://api.moonshot.cn/anthropic"
       - GITLAB_HOST="http://git-internal.nie.netease.com/"
     volumes:
       - ~/.ssh:/home/node/.ssh:ro
       - ~/monorepo:/workspace/monorepo
-
-    # Docker Compose 会自动处理重启逻辑，这里可以不加
-    # 但如果需要，可以设置 restart: always 或 unless-stopped

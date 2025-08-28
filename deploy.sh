@@ -1,2 +1,2 @@
 #!/bin/bash
-podman-compose up -d --build
+podman-compose -f deploy/docker-compose.yml up -d --build
