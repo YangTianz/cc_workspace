@@ -13,7 +13,7 @@ services:
     container_name: ytz-ai-agent
     # network_mode: "host"
     ports:
-      - "8000:8000"  # API服务端口
+      - "9000:8000"  # API服务端口
     env_file:
       - ../.env
     environment:
@@ -21,4 +21,4 @@ services:
       - GITLAB_BASE_URL=http://git-internal.nie.netease.com/
     volumes:
       - ~/.ssh:/home/node/.ssh:ro
-      - ~/monorepo:/workspace/monorepo
+      # - ~/monorepo:/workspace/monorepo
