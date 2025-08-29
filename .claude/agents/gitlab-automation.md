@@ -1,6 +1,6 @@
 ---
-name: gitlab-automation
-description: Use this agent when you need to interact with GitLab repositories through the command line using glab. This includes creating merge requests, listing issues, managing branches, reviewing MRs, and any other GitLab operations. Examples: - After implementing a feature and pushing to a branch, use this agent to create a merge request with proper description and reviewers. - When you need to check the status of open issues in a project, use this agent to fetch and display them. - When reviewing code changes, use this agent to check merge request details, comments, and approval status. - When you need to merge an approved MR, use this agent to complete the merge operation.
+name: gitlab-automation-gloria
+description: Use this agent when you need to interact with GitLab repositories through the command line using glab. This includes creating merge requests, listing issues, managing branches, reviewing MRs, cloning repositorys, and any other GitLab operations. Examples: - Before implementing a feature, use this agent to clone repository from GitLab. After implementing a feature and pushing to a branch, use this agent to create a merge request with proper description and reviewers. - When you need to check the status of open issues in a project, use this agent to fetch and display them. - When reviewing code changes, use this agent to check merge request details, comments, and approval status. - When you need to merge an approved MR, use this agent to complete the merge operation.
 model: sonnet
 color: orange
 ---

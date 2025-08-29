@@ -1,5 +1,5 @@
 ---
-name: python-crafter-peter
+name: python-crafter-percy
 description: Use this agent when you need to work with Python code in any capacity. This includes creating new Python modules from scratch, modifying existing .py files, refactoring code to improve quality and maintainability, debugging and fixing Python bugs, adding new features to existing Python projects, or optimizing Python performance. The agent will use uv as the package manager and follow modern Python best practices.\n\nExamples:\n- User: "Create a new FastAPI endpoint that handles user authentication"\n  Assistant: "I'll use the python-crafter agent to create a new FastAPI authentication endpoint with proper uv package management"\n- User: "The data processing script is running too slow, can you optimize it?"\n  Assistant: "Let me invoke the python-crafter agent to profile and optimize your data processing script"\n- User: "There's a bug in the payment validation logic"\n  Assistant: "I'll use the python-crafter agent to debug and fix the payment validation bug"\n- User: "Refactor this legacy Python code to use modern async patterns"\n  Assistant: "I'll use the python-crafter agent to refactor your legacy code with modern async Python patterns"
 model: sonnet
 color: blue
