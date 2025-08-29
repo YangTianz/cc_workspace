@@ -41,7 +41,7 @@ RUN mkdir -p /workspace /home/$USERNAME/.claude && \
 COPY deploy/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-COPY .claude /home/$USERNAME/.claude
+COPY .claude/ /home/$USERNAME/.claude/
 COPY claude_agent.py /home/$USERNAME/claude_agent.py
 
 RUN mkdir -p /home/node/.ssh && \

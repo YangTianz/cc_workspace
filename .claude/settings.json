@@ -1,15 +1,18 @@
 {
   "permissions": {
     "allow": [
+      "WebSearch",
       "Bash(ls:*)",
-      // "Bash(rm:*)",
       "Bash(uv run:*)",
       "Bash(git pull)",
       "Bash(git stash:*)",
       "Bash(git diff:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Edit(.*)",
+      "MultiEdit(.*)"
     ],
     "deny": [
+      "Bash(rm:*)",
       "Read(./.env.*)",
       "Read(./.env)"
     ],
@@ -18,6 +21,6 @@
     ]
   },
   "env": {
-    "USERNAME": "g85robot"
+    "USERNAME": "node"
   }
 }

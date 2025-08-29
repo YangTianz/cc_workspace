@@ -14,8 +14,6 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-ALLOWED_TOOLS: list[str] = ["Bash", "Read", "Write", "WebSearch", "Grep"]
-DISALLOWED_TOOLS: list[str] = ["Bash(rm*)"]
 SYSTEM_PROMPT = "您是一名资深 Python 开发工程师。"
 
 @app.get("/")
@@ -27,8 +25,6 @@ async def get_prompt(prompt: str):
             cwd="/workspace/repo",
             system_prompt=SYSTEM_PROMPT,
             continue_conversation=True,
-            allowed_tools=ALLOWED_TOOLS,
-            disallowed_tools=DISALLOWED_TOOLS,
             permission_mode="acceptEdits",
             extra_args={
                 "--verbose": None,
