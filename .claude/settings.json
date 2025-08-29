@@ -9,6 +9,11 @@
       "Bash(pip:*)",
       "Bash(export:*)",
       "Bash(curl:*)",
+      "Bash(glab repo view:*)",
+      "Bash(glab repo clone:*)",
+      "Bash(glab api:*)",
+      "Bash(glab issue:*)",
+      "Bash(glab mr:*)",
       "Edit(.*)",
       "MultiEdit(.*)"
     ],
