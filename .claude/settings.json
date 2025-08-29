@@ -4,20 +4,16 @@
       "WebSearch",
       "Bash(ls:*)",
       "Bash(uv run:*)",
-      "Bash(git pull)",
-      "Bash(git stash:*)",
-      "Bash(git diff:*)",
-      "Bash(git add:*)",
+      "Bash(git:*)",
       "Edit(.*)",
       "MultiEdit(.*)"
     ],
     "deny": [
-      "Bash(rm:*)",
       "Read(./.env.*)",
       "Read(./.env)"
     ],
     "ask": [
-      "Bash(git push:*)"
+      "Bash(rm:*)"
     ]
   },
   "env": {
