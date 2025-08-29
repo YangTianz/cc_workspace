@@ -18,7 +18,6 @@ from claude_code_sdk.types import (
     TextBlock,
     ToolResultBlock,
     ToolUseBlock,
-    UserMessage,
 )
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -44,11 +43,7 @@ async def health_check():
 
 
 def display_message(msg: Message) -> str:
-    if isinstance(msg, UserMessage):
-        for block in msg.content:
-            if isinstance(block, TextBlock):
-                print(f"User: {block.text}")
-    elif isinstance(msg, AssistantMessage):
+    if isinstance(msg, AssistantMessage):
         for block in msg.content:
             if isinstance(block, ToolUseBlock):
                 print(f"\n[使用工具：{block.name}]\n\t{block.input}\n")
@@ -85,6 +80,8 @@ async def chat(request: ChatRequest):
     """AI 对话接口"""
     if not request.prompt.strip():
         raise HTTPException(status_code=400, detail="prompt 不能为空")
+
+    print(f"User: {request.prompt}")
 
     async with ClaudeSDKClient(
         options=ClaudeCodeOptions(
