@@ -64,10 +64,9 @@ async def chat(request: ChatRequest):
             if isinstance(message, AssistantMessage):
                 for block in message.content:
                     if isinstance(block, ToolUseBlock):
-                        print(f"\n[使用工具：{block.name}]\n")
+                        print(f"\n[使用工具：{block.name}]\n\t{block.input}\n")
                     elif isinstance(block, TextBlock):
                         print(block.text, end="", flush=True)
-                        ai_response += block.text
                     elif isinstance(block, ToolResultBlock):
                         if block.content:
                             print(f"\n[工具结果：{block.content}]\n")
@@ -88,7 +87,6 @@ async def chat(request: ChatRequest):
                 else:
                     print("使用量统计: 未提供")
                 if message.result:
-                    ai_response += "\n\n"
                     ai_response += message.result
 
         # 返回AI的完整响应
