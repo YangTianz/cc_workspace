@@ -17,7 +17,7 @@ services:
     env_file:
       - ../.env
     environment:
-      - ANTHROPIC_BASE_URL=https://api.moonshot.cn/anthropic
+      - ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
       - GITLAB_BASE_URL=http://git-internal.nie.netease.com/
     volumes:
       - ~/.ssh:/home/node/.ssh:ro

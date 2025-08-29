@@ -3,8 +3,11 @@
     "allow": [
       "WebSearch",
       "Bash(ls:*)",
-      "Bash(uv run:*)",
+      "Bash(uv:*)",
       "Bash(git:*)",
+      "Bash(python:*)",
+      "Bash(pip:*)",
+      "Bash(export:*)",
       "Edit(.*)",
       "MultiEdit(.*)"
     ],
