@@ -14,6 +14,7 @@ from claude_code_sdk.types import (
     AssistantMessage,
     ResultMessage,
     TextBlock,
+    ToolResultBlock,
     ToolUseBlock,
 )
 from fastapi import FastAPI, HTTPException
@@ -53,16 +54,12 @@ async def chat(request: ChatRequest):
             system_prompt=SYSTEM_PROMPT,
             continue_conversation=True,
             permission_mode="acceptEdits",
-            extra_args={
-                "--timeout": "300",
-            },
         )
     ) as client:
         await client.query(request.prompt)
         # 收集AI的响应
         ai_response = ""
         async for message in client.receive_response():
-            print(f"Message type: {type(message)}")
             # 处理 AssistantMessage
             if isinstance(message, AssistantMessage):
                 for block in message.content:
@@ -71,10 +68,28 @@ async def chat(request: ChatRequest):
                     elif isinstance(block, TextBlock):
                         print(block.text, end="", flush=True)
                         ai_response += block.text
-            # 处理结果消息
-            elif isinstance(message, ResultMessage) and message.result:
-                print(f"Result: {message.result}")
-                ai_response += message.result
+                    elif isinstance(block, ToolResultBlock):
+                        if block.content:
+                            print(f"\n[工具结果：{block.content}]\n")
+
+            elif isinstance(message, ResultMessage):
+                print("\n=== 会话结果信息 ===")
+                print(f"会话 ID: {message.session_id}")
+                print(f"对话轮数: {message.num_turns}")
+                print(f"总耗时: {message.duration_ms}ms")
+                print(f"API 耗时: {message.duration_api_ms}ms")
+                print(f"错误状态: {'是' if message.is_error else '否'}")
+                if message.total_cost_usd is not None:
+                    print(f"费用: ${message.total_cost_usd:.6f}")
+                else:
+                    print("费用: 未提供")
+                if message.usage:
+                    print(f"使用量统计: {message.usage}")
+                else:
+                    print("使用量统计: 未提供")
+                if message.result:
+                    ai_response += "\n\n"
+                    ai_response += message.result
 
         # 返回AI的完整响应
         return ChatResponse(response=ai_response)
