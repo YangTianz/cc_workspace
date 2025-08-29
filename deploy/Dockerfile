@@ -19,13 +19,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   nodejs \
   npm \
   vim \
+  jq \
   && groupadd --gid 1000 $GROUP \
   && useradd --uid 1000 --gid $GROUP --shell /bin/bash --create-home $USERNAME \
   && mkdir -p /usr/local/share/npm-global \
   && chown -R $USERNAME:$GROUP /usr/local/share \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
-  && rm -rf /tmp/* /var/tmp/*
+  && rm -rf /tmp/* /var/tmp/* \
+  && curl -sSL "https://raw.githubusercontent.com/upciti/wakemeops/main/assets/install_repository" | sudo bash \
+  && sudo apt install glab
 
 # Persist bash history.
 RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history" \

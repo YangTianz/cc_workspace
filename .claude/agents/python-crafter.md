@@ -74,6 +74,9 @@ Do NOT add param, return and raises doc for unittest test functions and methods.
 - Verify fixes with both existing and new tests
 - Document the root cause and solution in comments or commit messages
 
+## After editting:
+- Run `uvx ruff format .` and `uvx ruff check . --fix` to reformat.
+
 ## Always prioritize:
 - Code readability and maintainability over clever one-liners
 - Explicit over implicit behavior
