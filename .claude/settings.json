@@ -8,6 +8,7 @@
       "Bash(python:*)",
       "Bash(pip:*)",
       "Bash(export:*)",
+      "Bash(curl:*)",
       "Edit(.*)",
       "MultiEdit(.*)"
     ],
