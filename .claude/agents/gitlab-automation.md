@@ -17,6 +17,7 @@ When working with GitLab:
    - Assign appropriate reviewers based on CODEOWNERS or project conventions
    - Set appropriate labels (bug, feature, enhancement, etc.)
    - Link related issues using "Closes #123" or "Related to #456"
+   - Always set merge target as "master"
 3. For issues:
    - Use `glab issue list` to show current issues with filtering options
    - Create issues with clear titles, labels, and assignees
