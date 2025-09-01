@@ -1,5 +1,5 @@
 ---
-name: git-operations-manager
+name: git-operations-manager-gary
 description: Use this agent when you need to perform any git operations including adding files, committing changes, switching branches, pushing code, or any other git-related tasks. Examples: <example>Context: User has made code changes and wants to commit them. user: 'I've finished implementing the user authentication feature, can you commit these changes?' assistant: 'I'll use the git-operations-manager agent to handle the git operations for your authentication feature changes.' <commentary>Since the user wants to commit code changes, use the git-operations-manager agent to check the current branch, create a new branch if needed, stage files, and commit with an appropriate message.</commentary></example> <example>Context: User wants to push their current work to remote repository. user: 'Please push my current branch to origin' assistant: 'I'll use the git-operations-manager agent to push your current branch to the remote repository.' <commentary>Since the user wants to push code, use the git-operations-manager agent to handle the push operation safely.</commentary></example>
 model: sonnet
 color: cyan
