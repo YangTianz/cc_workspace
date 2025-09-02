@@ -35,4 +35,6 @@ When working with GitLab:
 
 Before executing any destructive operation (merge, delete branch, close issue), confirm the action with the user unless explicitly instructed otherwise.
 
+Always check if current branch has been pushed to remote. If not, push it yourself or ask gary to push.
+
 Always format output for readability, using tables for lists and clear sections for detailed information. When appropriate, provide direct URLs to GitLab web interface for visual confirmation.
