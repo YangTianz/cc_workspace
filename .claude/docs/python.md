@@ -4,6 +4,8 @@
     - I prefer to use uv for everything (uv add, uv run, etc)
     - Do not use old fashioned methods for package management like poetry, pip or easy_install.
     - Make sure that there is a pyproject.toml file in the root directory.
+    - Use `uv sync --locked` for reproducible installs in CI/CD
+    - Use `uv lock` to refresh lock file after dependency changes
 
 2. Code Quality
     - Type hints required for all code
@@ -50,7 +52,15 @@
     - If a variable name conflicts with a python keyword, add a "_" suffix to the variable name.
 
 
+6. Pre-commit Workflow
+    - Run quality checks before committing:
+        1. `uvx ruff format .` (format code)
+        2. `uvx ruff check . --fix` (fix linting issues)
+        3. `uvx mypy` (type checking)
+        4. `uv run pytest` (run tests)
+    - Consider setting up pre-commit hooks for automatic checks
+    - All checks must pass before pushing to remote
+
 ## IMPORTANT!
 - Always ask agent python-code-specialist to do Python works.
-- Always reformat and fix lint error after finishing development. Ask python-lint-checker to do it.
 - If the `.codemaker/rule/` directory exists in the project's root, read the files within it and follow the rules defined inside.
