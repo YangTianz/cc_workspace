@@ -6,8 +6,8 @@ services:
       context: ..
       dockerfile: deploy/Dockerfile
       args:
-        USERNAME: node
-        GROUP: node
+        USERNAME: g85robot
+        GROUP: g85robot
         CLAUDE_CODE_VERSION: latest
     image: ytz-ai-agent-image 
     container_name: ytz-ai-agent
@@ -19,4 +19,4 @@ services:
     environment:
       - GITLAB_HOST=http://git-internal.nie.netease.com
     volumes:
-      - ~/.ssh:/home/node/.ssh:ro
+      - ~/.ssh:/home/g85robot/.ssh:ro

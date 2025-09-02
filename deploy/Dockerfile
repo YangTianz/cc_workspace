@@ -1,8 +1,8 @@
 FROM ghcr.io/astral-sh/uv:python3.11-bookworm-slim
 
 ARG CLAUDE_CODE_VERSION=latest
-ARG USERNAME=node
-ARG GROUP=node
+ARG USERNAME=g85robot
+ARG GROUP=g85robot
 
 # Install required system dependencies and create user in one layer
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -47,8 +47,8 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 COPY .claude/ /home/$USERNAME/.claude/
 COPY claude_agent.py /home/$USERNAME/claude_agent.py
 
-RUN mkdir -p /home/node/.ssh && \
-    chmod 700 /home/node/.ssh
+RUN mkdir -p /home/g85robot/.ssh && \
+    chmod 700 /home/g85robot/.ssh
 
 # Set up non-root user
 USER $USERNAME
@@ -68,5 +68,6 @@ RUN npm install -g @anthropic-ai/claude-code@${CLAUDE_CODE_VERSION} && \
 USER $USERNAME
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
-WORKDIR /home/$USERNAME
-CMD ["uv", "run", "--script", "claude_agent.py"]
+CMD ["uv", "run", "--script", "/home/g85robot/claude_agent.py"]
+
+WORKDIR /workspace
