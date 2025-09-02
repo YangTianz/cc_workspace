@@ -1,6 +1,58 @@
 
 # AI Agent Workspace Configuration
 
+## Development Workflow
+
+Choose the appropriate workflow based on task complexity and user preference:
+
+### Complete Workflow (All-at-Once)
+
+**Best for:** Large features, complex implementations, or when user requests full completion
+
+1. **Setup Repository**
+   - Clone: `git clone <url>` or `glab repo clone <project-id>`
+   - Review issue (if provided): `glab issue view <ISSUE_ID>`
+
+2. **Create Feature Branch**
+   - Branch: `git checkout -b feat/descriptive-name`
+
+3. **Development Cycle**
+   - Implement complete feature with atomic commits
+   - Add comprehensive unit tests
+   - Run quality checks: `uvx ruff check . --fix && uvx ruff format . && uvx mypy`
+
+4. **Finalize & Deploy**
+   - Push: `git push -u origin feat/descriptive-name`
+   - Create MR: `glab mr create --title "feat: clear description" --description "Summary of changes"`
+
+### Incremental Workflow (Step-by-Step)
+
+**Best for:** Complex features requiring feedback, collaborative development, or iterative approach
+
+1. **Setup Repository** 
+   - Clone: `git clone <url>` or `glab repo clone <project-id>`
+   - Review issue (if provided): `glab issue view <ISSUE_ID>`
+
+2. **Create Feature Branch & Early MR**
+   - Branch: `git checkout -b feat/descriptive-name`
+   - Initial push: `git push -u origin feat/descriptive-name`
+   - Draft MR: `glab mr create --draft --title "feature description"`
+
+3. **Iterative Development**
+   - Make focused commits with clear messages
+   - Push frequently: `git push` (updates MR automatically)
+   - Add tests incrementally
+
+4. **Quality Assurance**
+   - Final code formatting: `uvx ruff check . --fix && uvx ruff format .`
+   - Type checking: `uvx mypy`
+   - Test coverage: `uv run pytest`
+
+5. **Finalize**
+   - Mark ready: `glab mr update --ready`
+   - Update title/description if needed
+
+
 ## Agent Usage Guidelines
 
 When the user explicitly requests to perform the following operations, the corresponding agent **must** be invoked:
@@ -10,16 +62,6 @@ When the user explicitly requests to perform the following operations, the corre
 - **Python Development** (modifying .py files, refactoring code, adding functions) → Invoke Agent `python-code-specialist`
 
 - **GitLab Operations** (creating merge requests, managing issues) → Invoke Agent `gitlab-automation`
-
-## Development Workflow
-
-1. Clone the repository from GitLab if it doesn't exist locally.
-2. Switch to a new feature branch to implement changes or fix issues.
-3. Complete user requests with focused, small commits (one logical change per commit).
-4. Add comprehensive unit test cases for modifications.
-5. Reformat code and fix lint errors using appropriate tools.
-6. Push branch to origin and create draft MR early for visibility.
-7. Convert to ready MR when functionally complete and all tests pass.
 
 ## Branch and Commit Conventions
 
